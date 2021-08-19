@@ -5,8 +5,9 @@ import random
 import os
 import re
 os.system('cls' if os.name=='nt' else 'clear')
-welcomeMsg = "Piedra, Papel, Tijera, Lagarto, Spock!"
+welcomeMsg = "¡Bienvenido a Piedra, Papel, Tijera, Lagarto, Spock!"
 userChoiceMsg = "Elige tu arma R -> Piedra, P -> Papel, T -> Tijera, L -> Lagarto, S -> Spock: "
+userChoiceErrorMsg = "Por favor, no hagas tram: "
 reference = {
     'R': 'Piedra',
     'P': 'Papel',
@@ -17,22 +18,22 @@ reference = {
 userVictories = 0
 opponentVictories = 0
 while (userVictories + opponentVictories < 5):
-    print "\n"
-    print welcomeMsg
-    userChoice = raw_input(userChoiceMsg)
+    print("\n")
+    print (welcomeMsg)
+    userChoice = input(userChoiceMsg)
     userChoiceRef = reference.get(userChoice.upper())
     if not re.match("[SsRrPpTtLl]", userChoice):
-        print userChoiceMsg
+        print (userChoiceMsg)
         continue
     #Echo the user's choice
-    print "Elegiste: " + userChoiceRef
+    print (f"Elegiste: {userChoiceMsg}")
     choices = ['R', 'P', 'S', 'T', 'L']
     opponenetChoice = random.choice(choices)
     opponenetChoiceRef = reference.get(opponenetChoice)
-    print "Yo elegi: " + opponenetChoiceRef
+    print (f"Yo elegí: {opponenetChoiceRef}")
 
     if opponenetChoice == str.upper(userChoice):
-        print "Empate! "
+        print ("¡Empate!")
         continue
     elif opponenetChoice == 'R' and userChoice.upper() in ['T', 'L']:
         opponentWins = True
@@ -47,16 +48,16 @@ while (userVictories + opponentVictories < 5):
     else:       
         opponentWins = False
 
-    opponentWinsMsg = 'Yo gano! ' + opponenetChoiceRef + ' gana a ' + userChoiceRef
-    opponentLoosesMsg = 'Tu ganas! ' + userChoiceRef + ' gana a ' + opponenetChoiceRef
+    opponentWinsMsg = f'¡Yo gano! {opponenetChoiceRef} gana a {userChoiceRef}'
+    opponentLoosesMsg = f'¡Tu ganas! {userChoiceRef} gana a {opponenetChoiceRef}'
 
     if opponentWins:
         opponentVictories += 1
-        print opponentWinsMsg
+        print (opponentWinsMsg)
         continue
     else:
         userVictories += 1
-        print opponentLoosesMsg
+        print (opponentLoosesMsg)
         continue
 
-print "Fin! Has logrado ganarme " + str(userVictories) + " veces."
+print (f"¡Fin! Has logrado ganarme {str(userVictories)} veces.")
